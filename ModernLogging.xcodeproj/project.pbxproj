@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		72B0A6B32CDBAF17002860FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72B0A6902CDBABD8002860FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 72B0A6972CDBABD8002860FF;
+			remoteInfo = ModernLogging;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		72B0A6982CDBABD8002860FF /* ModernLogging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModernLogging.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72B0A6AF2CDBAF17002860FF /* ModernLoggingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModernLoggingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = ModernLogging;
 			sourceTree = "<group>";
 		};
+		72B0A6B02CDBAF17002860FF /* ModernLoggingTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ModernLoggingTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		72B0A6952CDBABD8002860FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72B0A6AC2CDBAF17002860FF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				72B0A69A2CDBABD8002860FF /* ModernLogging */,
+				72B0A6B02CDBAF17002860FF /* ModernLoggingTests */,
 				72B0A6992CDBABD8002860FF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				72B0A6982CDBABD8002860FF /* ModernLogging.app */,
+				72B0A6AF2CDBAF17002860FF /* ModernLoggingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +95,29 @@
 			productReference = 72B0A6982CDBABD8002860FF /* ModernLogging.app */;
 			productType = "com.apple.product-type.application";
 		};
+		72B0A6AE2CDBAF17002860FF /* ModernLoggingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72B0A6B52CDBAF17002860FF /* Build configuration list for PBXNativeTarget "ModernLoggingTests" */;
+			buildPhases = (
+				72B0A6AB2CDBAF17002860FF /* Sources */,
+				72B0A6AC2CDBAF17002860FF /* Frameworks */,
+				72B0A6AD2CDBAF17002860FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				72B0A6B42CDBAF17002860FF /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				72B0A6B02CDBAF17002860FF /* ModernLoggingTests */,
+			);
+			name = ModernLoggingTests;
+			packageProductDependencies = (
+			);
+			productName = ModernLoggingTests;
+			productReference = 72B0A6AF2CDBAF17002860FF /* ModernLoggingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +130,10 @@
 				TargetAttributes = {
 					72B0A6972CDBABD8002860FF = {
 						CreatedOnToolsVersion = 16.1;
+					};
+					72B0A6AE2CDBAF17002860FF = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 72B0A6972CDBABD8002860FF;
 					};
 				};
 			};
@@ -100,12 +152,20 @@
 			projectRoot = "";
 			targets = (
 				72B0A6972CDBABD8002860FF /* ModernLogging */,
+				72B0A6AE2CDBAF17002860FF /* ModernLoggingTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		72B0A6962CDBABD8002860FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72B0A6AD2CDBAF17002860FF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		72B0A6AB2CDBAF17002860FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		72B0A6B42CDBAF17002860FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 72B0A6972CDBABD8002860FF /* ModernLogging */;
+			targetProxy = 72B0A6B32CDBAF17002860FF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		72B0A6A42CDBABDA002860FF /* Debug */ = {
@@ -304,6 +379,42 @@
 			};
 			name = Release;
 		};
+		72B0A6B62CDBAF17002860FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N6CND3KBA3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tr.com.egesucu.ModernLoggingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ModernLogging.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ModernLogging";
+			};
+			name = Debug;
+		};
+		72B0A6B72CDBAF17002860FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N6CND3KBA3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tr.com.egesucu.ModernLoggingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ModernLogging.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ModernLogging";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -321,6 +432,15 @@
 			buildConfigurations = (
 				72B0A6A72CDBABDA002860FF /* Debug */,
 				72B0A6A82CDBABDA002860FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		72B0A6B52CDBAF17002860FF /* Build configuration list for PBXNativeTarget "ModernLoggingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72B0A6B62CDBAF17002860FF /* Debug */,
+				72B0A6B72CDBAF17002860FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

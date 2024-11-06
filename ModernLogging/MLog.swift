@@ -12,18 +12,18 @@ import Foundation
 struct MLog {
     
     var mood: Mood
-    var day: Date
-    var images: [Data]?
+    var date: Date
+    var images: [Data?]
     var notes: String?
     
     init(
         mood: Mood,
-        day: Date,
-        images: [Data]? = nil,
+        date: Date,
+        images: [Data?] = [],
         notes: String? = nil
     ) {
         self.mood = mood
-        self.day = day
+        self.date = date
         self.images = images
         self.notes = notes
     }
