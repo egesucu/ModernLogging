@@ -30,6 +30,10 @@ struct MLog {
     
 }
 
-enum Mood: String {
+enum Mood: String, CaseIterable {
     case happy, sad, neutral, optimistic, dreamy, content, pleased
+}
+
+extension Mood: Identifiable {
+    var id: Self { self }
 }
