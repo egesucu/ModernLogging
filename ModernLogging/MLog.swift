@@ -6,15 +6,25 @@
 //
 
 import Foundation
+import SwiftData
 
 
 /// A Logging Model to log users overall mood, current day, some image content and some notes.
-struct MLog {
+@Model class MLog {
     
-    var mood: Mood
+    private var moodRawValue: String
     var date: Date
     var images: [Data?]
     var notes: String?
+    
+    var mood: Mood {
+        get {
+            Mood(rawValue: moodRawValue) ?? .neutral
+        }
+        set {
+            moodRawValue = newValue.rawValue
+        }
+    }
     
     init(
         mood: Mood,
@@ -22,7 +32,7 @@ struct MLog {
         images: [Data?] = [],
         notes: String? = nil
     ) {
-        self.mood = mood
+        self.moodRawValue = mood.rawValue
         self.date = date
         self.images = images
         self.notes = notes

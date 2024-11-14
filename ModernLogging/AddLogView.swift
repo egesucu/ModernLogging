@@ -9,8 +9,12 @@ import SwiftUI
 import PhotosUI
 import OSLog
 import UIKit
+import SwiftData
 
 struct AddLogView: View {
+    
+    @Environment(\.modelContext) private var context
+    @Environment(\.dismiss) var dismiss
     
     @State private var log = MLog(mood: .content, date: .now)
     @State private var content = ""
@@ -19,12 +23,16 @@ struct AddLogView: View {
     @State private var photos: [UIImage] = []
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            moodView
-            contentView
-            dailyPhotoDumpView
-            Spacer()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 30) {
+                moodView
+                contentView
+                dailyPhotoDumpView
+                saveButton
+                    .padding(.all)
+            }
         }
+        .navigationTitle(Text("Add New Log"))
     }
     
     var moodView: some View {
@@ -54,17 +62,19 @@ struct AddLogView: View {
                         .bold()
                         .font(.headline)
                         .foregroundStyle(Color.gray)
-                    ZStack {
-                        
-                        TextField(
-                            "What do you want to write?",
-                            text: $content,
-                            axis: .vertical
-                        )
-                        .padding(.all, 4)
-                        .textFieldStyle(.plain)
-                        .background(roundedBackground)
+                    TextEditor(
+                        text: $content
+                    )
+                    .overlay {
+                        if content.isEmpty {
+                            Text("What do you want to write?")
+                                .bold()
+                                .font(.callout)
+                                .foregroundStyle(Color.gray)
+                        }
                     }
+                    .background(roundedBackground)
+                    .frame(minHeight: 250)
                     
                 }
                 .padding(.all)
@@ -79,7 +89,7 @@ struct AddLogView: View {
                 Color.gray,
                 style: .init(
                     lineWidth: 1.2,
-                    dash: [3, 3]
+                    dash: [5, 5]
                 )
             )
     }
@@ -108,18 +118,44 @@ struct AddLogView: View {
                     await loadImages()
                 }
             }
-                ScrollView(.horizontal) {
-                    HStack(spacing: 10) {
-                        ForEach(photos, id: \.self) { photo in
-                            Image(uiImage: photo)
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(8)
-                                .padding(.all)
-                        }
+            ScrollView(.horizontal) {
+                HStack(spacing: 10) {
+                    ForEach(photos, id: \.self) { photo in
+                        Image(uiImage: photo)
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(8)
+                            .padding(.all)
                     }
                 }
+            }
         }
+    }
+    
+    var saveButton: some View {
+        HStack {
+            Spacer()
+            Button(action: save) {
+                Text("Save")
+                    .font(.title)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(Color.blue.mix(with: .black, by: 0.4))
+            Spacer()
+        }
+    }
+    
+    private func save() {
+        log = MLog(
+            mood: mood,
+            date: .now,
+            images: map(photos),
+            notes: content
+        )
+        
+        context.insert(log)
+        dismiss.callAsFunction()
+        
     }
     
     private func loadImages() async {
@@ -133,8 +169,14 @@ struct AddLogView: View {
             }
         }
     }
+    
+    private func map(_ photos: [UIImage]) -> [Data?] {
+        photos.map { $0.jpegData(compressionQuality: 0.8) }
+    }
 }
 
 #Preview {
-    AddLogView()
+    let previewContainer = try! ModelContainer(for: MLog.self)
+    return AddLogView()
+        .modelContainer(previewContainer)
 }
