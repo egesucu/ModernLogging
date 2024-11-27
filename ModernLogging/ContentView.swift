@@ -6,19 +6,67 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    
+    @Query var logs: [MLog]
+    @State private var openAddLog: Bool = false
+    @Environment(\.modelContext) var modelContext
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                ForEach(logs) { log in
+                    VStack {
+                        HStack {
+                            Text("Mood")
+                                .bold()
+                            Spacer()
+                            Text(log.mood.rawValue.capitalized)
+                        }
+                        HStack {
+                            Text("Notes")
+                                .bold()
+                            Spacer()
+                            Text(log.notes ?? "")
+                        }
+                    }
+                }
+                .onDelete(perform: removeLogs(from:))
+            }
+            .navigationTitle("Logs")
+            .toolbar {
+                ToolbarItem {
+                    Button {
+                        openAddLog.toggle()
+                    } label: {
+                        Text("Add Log")
+                    }
+                }
+            }
         }
-        .padding()
+        .sheet(
+            isPresented: $openAddLog
+        ) {
+            AddLogView()
+        }
+    }
+    
+    private func removeLogs(from indexSet: IndexSet) {
+        for index in indexSet {
+            let log = logs[index]
+            removeLog(log)
+        }
+    }
+    
+    private func removeLog(_ log: MLog) {
+        modelContext.delete(log)
     }
 }
 
 #Preview {
-    ContentView()
+    let previewContainer = try! ModelContainer(for: MLog.self)
+    return ContentView()
+        .modelContainer(previewContainer)
 }
