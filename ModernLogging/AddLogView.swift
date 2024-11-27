@@ -32,7 +32,12 @@ struct AddLogView: View {
                     .padding(.all)
             }
         }
-        .navigationTitle(Text("Add New Log"))
+        .navigationTitle(
+            Text("Add New Log")
+                .accessibilityLabel(
+                    AccessibilityIdentifiers.addLogView
+                )
+        )
     }
     
     var moodView: some View {
@@ -49,6 +54,9 @@ struct AddLogView: View {
                     }
                 }
                 .tint(Color.black.opacity(0.7))
+                .accessibilityIdentifier(
+                    AccessibilityIdentifiers.addLogPicker
+                )
             }
         }
         .padding()

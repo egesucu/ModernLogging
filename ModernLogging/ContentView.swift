@@ -32,7 +32,14 @@ struct ContentView: View {
                             Text(log.notes ?? "")
                         }
                     }
+                    .accessibilityIdentifier(
+                        AccessibilityIdentifiers
+                            .listItem(item: log.date.formatted())
+                    )
                 }
+                .accessibilityIdentifier(
+                    AccessibilityIdentifiers.logListView
+                )
                 .onDelete(perform: removeLogs(from:))
             }
             .navigationTitle("Logs")
@@ -43,6 +50,10 @@ struct ContentView: View {
                     } label: {
                         Text("Add Log")
                     }
+                    .accessibilityIdentifier(
+                        AccessibilityIdentifiers
+                            .addLogButton
+                    )
                 }
             }
         }
