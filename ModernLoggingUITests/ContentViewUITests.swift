@@ -40,7 +40,8 @@ final class ContentViewUITests: XCTestCase {
         try openAddLogView()
         let addLogViewTitle = AccessibilityIdentifiers.addLogView
         let addLogView = app.staticTexts[addLogViewTitle]
-        XCTAssertTrue(addLogView.exists, "The Add Log View title is not visible.")
+        let exists = addLogView.waitForExistence(timeout: 1)
+        XCTAssertTrue(exists, "The Add Log View title is not visible.")
         
     }
     

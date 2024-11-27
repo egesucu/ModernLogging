@@ -23,21 +23,23 @@ struct AddLogView: View {
     @State private var photos: [UIImage] = []
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 30) {
-                moodView
-                contentView
-                dailyPhotoDumpView
-                saveButton
-                    .padding(.all)
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 30) {
+                    moodView
+                    contentView
+                    dailyPhotoDumpView
+                    saveButton
+                        .padding(.all)
+                }
             }
+            .navigationTitle(
+                Text("Add New Log")
+                    .accessibilityLabel(
+                        AccessibilityIdentifiers.addLogView
+                    )
+            )
         }
-        .navigationTitle(
-            Text("Add New Log")
-                .accessibilityLabel(
-                    AccessibilityIdentifiers.addLogView
-                )
-        )
     }
     
     var moodView: some View {
