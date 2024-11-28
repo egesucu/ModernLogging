@@ -38,6 +38,18 @@ import SwiftData
         self.notes = notes
     }
     
+    internal init(
+        moodRawValue: String,
+        date: Date,
+        images: [Data?] = [],
+        notes: String? = nil
+    ) {
+        self.moodRawValue = moodRawValue
+        self.date = date
+        self.images = images
+        self.notes = notes
+    }
+    
 }
 
 enum Mood: String, CaseIterable {

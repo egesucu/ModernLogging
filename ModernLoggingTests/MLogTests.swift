@@ -48,6 +48,21 @@ class MLogTests {
         }
     }
     
+    @Test func testMoodDefaultsToNeutral() async throws {
+        let log = MLog(moodRawValue: "invalid", date: .now)
+        
+        #expect(log.mood == .neutral)
+        log.mood = .content
+        #expect(log.mood == .content)
+        
+    }
+    
+    @Test func testMoodIdentifiableConformance() async throws {
+        for mood in Mood.allCases {
+            #expect(mood.id == mood, "The ID of \(mood) should equal itself.")
+        }
+    }
+    
     @Test func testNotes() async throws {
         model = MLog(mood: .dreamy, date: Date(), notes: "Some Days, you can't help but smile.")
         #expect(model?.notes == "Some Days, you can't help but smile.")
