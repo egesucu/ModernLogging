@@ -30,6 +30,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7226822D2D143071008B161D /* Exceptions for "ModernLogging" folder in "ModernLogging" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Environments/Dev.xcconfig,
+				Environments/PROD.xcconfig,
+				Environments/UAT.xcconfig,
+			);
+			target = 72B0A6972CDBABD8002860FF /* ModernLogging */;
+		};
 		72BE0AEC2CF7AC83006D7120 /* Exceptions for "ModernLogging" folder in "ModernLoggingUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -43,6 +52,7 @@
 		72B0A69A2CDBABD8002860FF /* ModernLogging */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				7226822D2D143071008B161D /* Exceptions for "ModernLogging" folder in "ModernLogging" target */,
 				72BE0AEC2CF7AC83006D7120 /* Exceptions for "ModernLogging" folder in "ModernLoggingUITests" target */,
 			);
 			path = ModernLogging;
@@ -184,7 +194,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1610;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					72B0A6972CDBABD8002860FF = {
 						CreatedOnToolsVersion = 16.1;
