@@ -29,7 +29,9 @@ struct ContentView: View {
                             Text("Notes")
                                 .bold()
                             Spacer()
-                            Text(log.notes ?? "")
+                            if let notes = log.notes {
+                                Text(notes)
+                            }
                         }
                     }
                     .accessibilityIdentifier(
@@ -60,7 +62,7 @@ struct ContentView: View {
         .sheet(
             isPresented: $openAddLog
         ) {
-            AddLogView()
+            AddLogView(viewModel: .init())
         }
     }
     

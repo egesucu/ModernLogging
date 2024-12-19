@@ -6,36 +6,116 @@
 //
 
 import XCTest
+@testable import ModernLogging
 
 final class AddLogViewUITests: XCTestCase {
+    
+    var app: XCUIApplication!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launch()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
     }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    private func openAddLogView() throws {
+        let buttonText = AccessibilityIdentifiers.addLogButton
+        let addLogButton = app.buttons[buttonText]
+        addLogButton.tap()
     }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+    
+    func testLoadImages() throws {
+        try openAddLogView()
+        
+        let images = app.images
+        XCTAssertGreaterThan(images.count, 0)
+    }
+    
+    func testMoodPickerSelection() throws {
+        try openAddLogView()
+        let button = app.buttons[AccessibilityIdentifiers.addLogPicker]
+        let buttonExists = button.waitForExistence(timeout: 2)
+        if buttonExists {
+            button.tap()
+            let optimisticOption = app.buttons["Optimistic"]
+            XCTAssertTrue(optimisticOption.exists, "Mood option 'Optimistic' is not visible.")
+            optimisticOption.tap()
+            XCTAssertEqual(button.label, "Mood, Optimistic", "Mood Picker did not update correctly.")
+        } else {
+            XCTFail("Button bulunamadı.")
         }
     }
+    
+    func testContentEditorInteraction() throws {
+        try openAddLogView()
+        let textEditor = app.textViews.firstMatch
+        XCTAssertTrue(textEditor.exists, "Content Editor alanı bulunamadı.")
+
+        textEditor.tap()
+        textEditor.typeText("Bugün harika bir gün!")
+        XCTAssertEqual(textEditor.value as? String, "Bugün harika bir gün!", "Content Editor'a yazılan metin hatalı.")
+    }
+    
+    func testLoadImageLogic() throws {
+        try openAddLogView()
+        
+        // Open Photos Picker
+        let button = app.buttons["Add Photo Button"].firstMatch
+        button.tap()
+            
+        
+        // Finding the PhotosItemPicker
+        let picker = XCUIApplication()
+            .otherElements
+            .containing(.any, identifier: "PXGSingleViewContainerView_AX")
+            .firstMatch
+        
+        let firstImage = picker
+            .images
+            .element(matching: NSPredicate(format: "label CONTAINS[c] 'Photo'"))
+            .firstMatch
+
+        firstImage.tap()
+        
+        let doneButton = app.buttons["Add"]
+        
+        doneButton.tap()
+        
+        let expectedScrollView = app.scrollViews["Photo Scroll"].firstMatch
+        
+        let element = expectedScrollView.images.firstMatch
+        
+        XCTAssertTrue(element.exists)
+        
+    }
+    
+    func testSaveButtonFunctionality() throws {
+        try openAddLogView()
+        
+        let button = app.buttons[AccessibilityIdentifiers.addLogPicker]
+        button.tap()
+        let optimisticOption = app.buttons["Optimistic"]
+        optimisticOption.tap()
+        let textEditor = app.textViews.firstMatch
+        textEditor.tap()
+        textEditor.typeText("Bugün fena bir gün değil!")
+
+        let saveButton = app.buttons["Save"]
+        XCTAssertTrue(saveButton.exists, "Save butonu bulunamadı.")
+
+        saveButton.tap()
+        
+        let moodCheck = app.staticTexts["Optimistic"]
+        let textCheck = app.staticTexts["Bugün fena bir gün değil!"]
+        
+        XCTAssertTrue(moodCheck.exists)
+        XCTAssertTrue(textCheck.exists)
+    }
+    
+    
+    
 }

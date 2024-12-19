@@ -16,11 +16,11 @@ struct AddLogView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) var dismiss
     
-    @State private var log = MLog(mood: .content, date: .now)
-    @State private var content = ""
-    @State private var mood: Mood = .happy
-    @State private var selectedItems: [PhotosPickerItem] = []
-    @State private var photos: [UIImage] = []
+    @State private var viewModel: AddLogViewModel
+    
+    init(viewModel: AddLogViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         NavigationStack {
@@ -49,7 +49,7 @@ struct AddLogView: View {
                     .bold()
                     .font(.headline)
                     .foregroundStyle(Color.gray)
-                Picker("Mood", selection: $mood) {
+                Picker("Mood", selection: $viewModel.mood) {
                     ForEach(Mood.allCases) { selection in
                         Text(selection.rawValue.capitalized)
                             .fontWeight(.black)
@@ -73,10 +73,10 @@ struct AddLogView: View {
                         .font(.headline)
                         .foregroundStyle(Color.gray)
                     TextEditor(
-                        text: $content
+                        text: $viewModel.content
                     )
                     .overlay {
-                        if content.isEmpty {
+                        if viewModel.content.isEmpty {
                             Text("What do you want to write?")
                                 .bold()
                                 .font(.callout)
@@ -112,7 +112,7 @@ struct AddLogView: View {
                     .foregroundStyle(Color.gray)
                     .padding(.all)
                 PhotosPicker(
-                    selection: $selectedItems,
+                    selection: $viewModel.selectedItems,
                     matching: .images,
                     photoLibrary: .shared()
                 ) {
@@ -122,15 +122,16 @@ struct AddLogView: View {
                         .foregroundColor(.gray)
                 }
                 .buttonStyle(.borderless)
+                .accessibilityIdentifier("Add Photo Button")
             }
-            .onChange(of: selectedItems) {
+            .onChange(of: viewModel.selectedItems) {
                 Task {
                     await loadImages()
                 }
             }
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
-                    ForEach(photos, id: \.self) { photo in
+                    ForEach(viewModel.photos, id: \.self) { photo in
                         Image(uiImage: photo)
                             .resizable()
                             .frame(width: 100, height: 100)
@@ -139,13 +140,17 @@ struct AddLogView: View {
                     }
                 }
             }
+            .accessibilityIdentifier("Photo Scroll")
         }
     }
     
     var saveButton: some View {
         HStack {
             Spacer()
-            Button(action: save) {
+            Button {
+                viewModel.save(context: context)
+                dismiss.callAsFunction()
+            } label: {
                 Text("Save")
                     .font(.title)
             }
@@ -155,38 +160,23 @@ struct AddLogView: View {
         }
     }
     
-    private func save() {
-        log = MLog(
-            mood: mood,
-            date: .now,
-            images: map(photos),
-            notes: content
-        )
-        
-        context.insert(log)
-        dismiss.callAsFunction()
-        
-    }
-    
-    private func loadImages() async {
-        photos.removeAll()
-        for item in selectedItems {
+    func loadImages() async {
+        viewModel.photos.removeAll()
+        for item in viewModel.selectedItems {
             if let data = try? await item.loadTransferable(type: Data.self),
                let photo = UIImage(data: data) {
-                photos.append(photo)
+                viewModel.photos.append(photo)
             } else {
                 Logger().error("Could not load image \(item.itemIdentifier ?? "")")
             }
         }
     }
-    
-    private func map(_ photos: [UIImage]) -> [Data?] {
-        photos.map { $0.jpegData(compressionQuality: 0.8) }
-    }
 }
 
 #Preview {
     let previewContainer = try! ModelContainer(for: MLog.self)
-    return AddLogView()
+    return AddLogView(
+        viewModel: .init()
+    )
         .modelContainer(previewContainer)
 }
