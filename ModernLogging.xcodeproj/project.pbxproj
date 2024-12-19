@@ -33,7 +33,7 @@
 		72BE0AEC2CF7AC83006D7120 /* Exceptions for "ModernLogging" folder in "ModernLoggingUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				AccessibilityIdentifiers.swift,
+				Models/AccessibilityIdentifiers.swift,
 			);
 			target = 72BE0AD32CF7A259006D7120 /* ModernLoggingUITests */;
 		};
