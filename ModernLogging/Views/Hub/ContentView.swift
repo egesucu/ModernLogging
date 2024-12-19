@@ -13,6 +13,7 @@ struct ContentView: View {
     @Query var logs: [MLog]
     @State private var openAddLog: Bool = false
     @Environment(\.modelContext) var modelContext
+    @State private var selectedImage: UIImage?
     
     var body: some View {
         NavigationStack {
@@ -33,6 +34,7 @@ struct ContentView: View {
                                 Text(notes)
                             }
                         }
+                        previewImageView(log: log)
                     }
                     .accessibilityIdentifier(
                         AccessibilityIdentifiers
@@ -63,6 +65,47 @@ struct ContentView: View {
             isPresented: $openAddLog
         ) {
             AddLogView(viewModel: .init())
+        }
+        .overlay(content: previewImageOverlay)
+    }
+    
+    @ViewBuilder
+    func previewImageOverlay() -> some View {
+        if let image = selectedImage {
+            ZStack {
+                Color.black.opacity(0.7)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        selectedImage = nil
+                    }
+                Image(uiImage: image)
+                    .resizable()
+                    .clipShape(.rect(cornerRadius: 10))
+                    .frame(width: 250, height: 250)
+            }
+            .animation(.smooth, value: selectedImage)
+        }
+    }
+    
+    @ViewBuilder
+    func previewImageView(log: MLog) -> some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 20) {
+                ForEach(log.images, id: \.self) { imageData in
+                    if let imageData,
+                       let uiImage = UIImage(data: imageData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .clipShape(.rect(cornerRadius: 10))
+                            .onTapGesture {
+                                withAnimation {
+                                    selectedImage = uiImage
+                                }
+                            }
+                    }
+                }
+            }
         }
     }
     
