@@ -14,11 +14,7 @@ jobs:
     steps:
       - name: Install Pre-Req.
         run: |
-          bundle install
           brew install swiftlint
-          bundle install
-          bundle exec fastlane install_plugins
-          bundle update fastlane
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set Default Scheme
