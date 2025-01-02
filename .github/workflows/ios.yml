@@ -15,6 +15,10 @@ jobs:
       - name: Install Pre-Req.
         run: |
           brew install swiftlint
+      - name: Install Bundler
+        run: gem install bundler
+      - name: Install Gems
+        run: bundle install --jobs 4 --retry 3
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set Default Scheme
