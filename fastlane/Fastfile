@@ -1,5 +1,4 @@
 opt_out_usage
-xcodes(version: '16.2')
 update_fastlane
 
 default_platform(:ios)
