@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "AEEAFE77-3CDF-46DF-873C-A6A3900515A5",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:ModernLogging.xcodeproj",
+      "identifier" : "72B0A6972CDBABD8002860FF",
+      "name" : "ModernLogging"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:ModernLogging.xcodeproj",
+        "identifier" : "72B0A6AE2CDBAF17002860FF",
+        "name" : "ModernLoggingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:ModernLogging.xcodeproj",
+        "identifier" : "72BE0AD32CF7A259006D7120",
+        "name" : "ModernLoggingUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

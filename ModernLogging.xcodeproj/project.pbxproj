@@ -24,6 +24,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7213604F2D26F1A400E98FDF /* ModernLogging-DEV.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "ModernLogging-DEV.xctestplan"; sourceTree = "<group>"; };
+		721360502D26F1CA00E98FDF /* ModernLogging-UAT.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "ModernLogging-UAT.xctestplan"; sourceTree = "<group>"; };
+		721360512D26F1D800E98FDF /* ModernLogging.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ModernLogging.xctestplan; sourceTree = "<group>"; };
 		72B0A6982CDBABD8002860FF /* ModernLogging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModernLogging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B0A6AF2CDBAF17002860FF /* ModernLoggingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModernLoggingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		72BE0AD42CF7A259006D7120 /* ModernLoggingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModernLoggingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +39,7 @@
 				Environments/Dev.xcconfig,
 				Environments/PROD.xcconfig,
 				Environments/UAT.xcconfig,
+				Info.plist,
 			);
 			target = 72B0A6972CDBABD8002860FF /* ModernLogging */;
 		};
@@ -98,6 +102,9 @@
 		72B0A68F2CDBABD8002860FF = {
 			isa = PBXGroup;
 			children = (
+				721360512D26F1D800E98FDF /* ModernLogging.xctestplan */,
+				721360502D26F1CA00E98FDF /* ModernLogging-UAT.xctestplan */,
+				7213604F2D26F1A400E98FDF /* ModernLogging-DEV.xctestplan */,
 				72B0A69A2CDBABD8002860FF /* ModernLogging */,
 				72B0A6B02CDBAF17002860FF /* ModernLoggingTests */,
 				72BE0AD52CF7A259006D7120 /* ModernLoggingUITests */,
@@ -292,8 +299,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		72B0A6A42CDBABDA002860FF /* Debug */ = {
+		721360132D26D77300E98FDF /* UAT */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/UAT.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -353,10 +362,156 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = UAT;
 		};
-		72B0A6A52CDBABDA002860FF /* Release */ = {
+		721360142D26D77300E98FDF /* UAT */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/UAT.xcconfig;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ModernLogging/Preview Content\"";
+				DEVELOPMENT_TEAM = N6CND3KBA3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ModernLogging/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ModernLogging;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "tr.com.egesucu.ModernLogging-uat";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = UAT;
+		};
+		721360152D26D77300E98FDF /* UAT */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/UAT.xcconfig;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N6CND3KBA3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tr.com.egesucu.ModernLoggingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ModernLogging.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ModernLogging";
+			};
+			name = UAT;
+		};
+		721360162D26D77300E98FDF /* UAT */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/UAT.xcconfig;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N6CND3KBA3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tr.com.egesucu.ModernLoggingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ModernLogging;
+			};
+			name = UAT;
+		};
+		72B0A6A42CDBABDA002860FF /* Dev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/Dev.xcconfig;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Dev;
+		};
+		72B0A6A52CDBABDA002860FF /* PROD */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/PROD.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -392,6 +547,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -407,21 +563,64 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = PROD;
 		};
-		72B0A6A72CDBABDA002860FF /* Debug */ = {
+		72B0A6A72CDBABDA002860FF /* Dev */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/Dev.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ModernLogging/Preview Content\"";
 				DEVELOPMENT_TEAM = N6CND3KBA3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ModernLogging/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "ML DEV";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "tr.com.egesucu.ModernLogging-dev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Dev;
+		};
+		72B0A6A82CDBABDA002860FF /* PROD */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/PROD.xcconfig;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ModernLogging/Preview Content\"";
+				DEVELOPMENT_TEAM = N6CND3KBA3;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ModernLogging/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "ML UAT";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -439,40 +638,12 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = PROD;
 		};
-		72B0A6A82CDBABDA002860FF /* Release */ = {
+		72B0A6B62CDBAF17002860FF /* Dev */ = {
 			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ModernLogging/Preview Content\"";
-				DEVELOPMENT_TEAM = N6CND3KBA3;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tr.com.egesucu.ModernLogging;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		72B0A6B62CDBAF17002860FF /* Debug */ = {
-			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/Dev.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -482,33 +653,42 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tr.com.egesucu.ModernLoggingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ModernLogging.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ModernLogging";
 			};
-			name = Debug;
+			name = Dev;
 		};
-		72B0A6B72CDBAF17002860FF /* Release */ = {
+		72B0A6B72CDBAF17002860FF /* PROD */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/PROD.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N6CND3KBA3;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tr.com.egesucu.ModernLoggingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ModernLogging.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ModernLogging";
 			};
-			name = Release;
+			name = PROD;
 		};
-		72BE0ADC2CF7A259006D7120 /* Debug */ = {
+		72BE0ADC2CF7A259006D7120 /* Dev */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/Dev.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -524,10 +704,12 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ModernLogging;
 			};
-			name = Debug;
+			name = Dev;
 		};
-		72BE0ADD2CF7A259006D7120 /* Release */ = {
+		72BE0ADD2CF7A259006D7120 /* PROD */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 72B0A69A2CDBABD8002860FF /* ModernLogging */;
+			baseConfigurationReferenceRelativePath = Environments/PROD.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -543,7 +725,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ModernLogging;
 			};
-			name = Release;
+			name = PROD;
 		};
 /* End XCBuildConfiguration section */
 
@@ -551,38 +733,42 @@
 		72B0A6932CDBABD8002860FF /* Build configuration list for PBXProject "ModernLogging" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				72B0A6A42CDBABDA002860FF /* Debug */,
-				72B0A6A52CDBABDA002860FF /* Release */,
+				72B0A6A42CDBABDA002860FF /* Dev */,
+				721360132D26D77300E98FDF /* UAT */,
+				72B0A6A52CDBABDA002860FF /* PROD */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = PROD;
 		};
 		72B0A6A62CDBABDA002860FF /* Build configuration list for PBXNativeTarget "ModernLogging" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				72B0A6A72CDBABDA002860FF /* Debug */,
-				72B0A6A82CDBABDA002860FF /* Release */,
+				72B0A6A72CDBABDA002860FF /* Dev */,
+				721360142D26D77300E98FDF /* UAT */,
+				72B0A6A82CDBABDA002860FF /* PROD */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = PROD;
 		};
 		72B0A6B52CDBAF17002860FF /* Build configuration list for PBXNativeTarget "ModernLoggingTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				72B0A6B62CDBAF17002860FF /* Debug */,
-				72B0A6B72CDBAF17002860FF /* Release */,
+				72B0A6B62CDBAF17002860FF /* Dev */,
+				721360152D26D77300E98FDF /* UAT */,
+				72B0A6B72CDBAF17002860FF /* PROD */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = PROD;
 		};
 		72BE0ADE2CF7A259006D7120 /* Build configuration list for PBXNativeTarget "ModernLoggingUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				72BE0ADC2CF7A259006D7120 /* Debug */,
-				72BE0ADD2CF7A259006D7120 /* Release */,
+				72BE0ADC2CF7A259006D7120 /* Dev */,
+				721360162D26D77300E98FDF /* UAT */,
+				72BE0ADD2CF7A259006D7120 /* PROD */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = PROD;
 		};
 /* End XCConfigurationList section */
 	};

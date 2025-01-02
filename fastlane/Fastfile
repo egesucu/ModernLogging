@@ -1,0 +1,12 @@
+opt_out_usage
+xcodes(version: '16.2')
+update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :build_and_test do
+    run_tests(scheme: "ModernLogging-DEV")
+  end
+end

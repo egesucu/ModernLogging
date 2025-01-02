@@ -24,43 +24,19 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "PROD"
+      buildConfiguration = "Dev"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:ModernLogging.xctestplan"
+            reference = "container:ModernLogging-DEV.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "72B0A6AE2CDBAF17002860FF"
-               BuildableName = "ModernLoggingTests.xctest"
-               BlueprintName = "ModernLoggingTests"
-               ReferencedContainer = "container:ModernLogging.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "72BE0AD32CF7A259006D7120"
-               BuildableName = "ModernLoggingUITests.xctest"
-               BlueprintName = "ModernLoggingUITests"
-               ReferencedContainer = "container:ModernLogging.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "PROD"
+      buildConfiguration = "Dev"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -81,7 +57,7 @@
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "PROD"
+      buildConfiguration = "Dev"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -98,10 +74,10 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "PROD">
+      buildConfiguration = "Dev">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "PROD"
+      buildConfiguration = "Dev"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

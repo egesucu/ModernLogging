@@ -10,47 +10,56 @@ import SwiftData
 
 struct ContentView: View {
     
-    @Query var logs: [MLog]
-    @State private var openAddLog: Bool = false
+    @Query(sort: \MLog.date, order: .reverse) var logs: [MLog]
     @Environment(\.modelContext) var modelContext
-    @State private var selectedImage: UIImage?
+    @State var contentViewModel = ContentViewModel()
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(logs) { log in
-                    VStack {
-                        HStack {
-                            Text("Mood")
-                                .bold()
-                            Spacer()
-                            Text(log.mood.rawValue.capitalized)
-                        }
-                        HStack {
-                            Text("Notes")
-                                .bold()
-                            Spacer()
-                            if let notes = log.notes {
-                                Text(notes)
+            VStack {
+                dataOfDayView()
+                    .padding()
+                List {
+                    ForEach(logs) { log in
+                        VStack {
+                            HStack {
+                                Text("Mood")
+                                    .bold()
+                                Spacer()
+                                Text(log.mood.rawValue.capitalized)
                             }
+                            HStack {
+                                Text("Notes")
+                                    .bold()
+                                Spacer()
+                                if let notes = log.notes {
+                                    Text(notes)
+                                }
+                            }
+                            HStack {
+                                Text("Date")
+                                    .bold()
+                                Spacer()
+                                Text(log.date.formatted())
+                            }
+                            previewImageView(log: log)
                         }
-                        previewImageView(log: log)
+                        .accessibilityIdentifier(
+                            AccessibilityIdentifiers
+                                .listItem(item: log.date.formatted())
+                        )
                     }
                     .accessibilityIdentifier(
-                        AccessibilityIdentifiers
-                            .listItem(item: log.date.formatted())
+                        AccessibilityIdentifiers.logListView
                     )
+                    .onDelete(perform: removeLogs(from:))
                 }
-                .accessibilityIdentifier(
-                    AccessibilityIdentifiers.logListView
-                )
-                .onDelete(perform: removeLogs(from:))
             }
             .navigationTitle("Logs")
             .toolbar {
                 ToolbarItem {
                     Button {
-                        openAddLog.toggle()
+                        contentViewModel.openAddLog.toggle()
                     } label: {
                         Text("Add Log")
                     }
@@ -62,28 +71,31 @@ struct ContentView: View {
             }
         }
         .sheet(
-            isPresented: $openAddLog
+            isPresented: $contentViewModel.openAddLog
         ) {
             AddLogView(viewModel: .init())
         }
         .overlay(content: previewImageOverlay)
+        .task {
+            await contentViewModel.fetchData()
+        }
     }
     
     @ViewBuilder
     func previewImageOverlay() -> some View {
-        if let image = selectedImage {
+        if let image = contentViewModel.selectedImage {
             ZStack {
                 Color.black.opacity(0.7)
                     .ignoresSafeArea()
                     .onTapGesture {
-                        selectedImage = nil
+                        contentViewModel.selectedImage = nil
                     }
                 Image(uiImage: image)
                     .resizable()
                     .clipShape(.rect(cornerRadius: 10))
                     .frame(width: 250, height: 250)
             }
-            .animation(.smooth, value: selectedImage)
+            .animation(.smooth, value: contentViewModel.selectedImage)
         }
     }
     
@@ -100,12 +112,47 @@ struct ContentView: View {
                             .clipShape(.rect(cornerRadius: 10))
                             .onTapGesture {
                                 withAnimation {
-                                    selectedImage = uiImage
+                                    contentViewModel.selectedImage = uiImage
                                 }
                             }
                     }
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    private func dataOfDayView() -> some View {
+        if let dataOfDay = contentViewModel.dataOfDay {
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Text(dataOfDay.title)
+                        .bold()
+                        .font(.title)
+                    Spacer()
+                    Button {
+                        Task { @MainActor in
+                            await contentViewModel.fetchData()
+                        }
+                    } label: {
+                        Image(systemName: "arrow.clockwise.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
+                }
+                Text(dataOfDay.content)
+                    .font(.callout)
+                    .animation(.interpolatingSpring, value: dataOfDay.content)
+            }
+            .padding()
+            .background(
+                Rectangle()
+                    .fill(Color.gray.opacity(0.2))
+                    .clipShape(.rect(cornerRadius: 20))
+                    .animation(.smooth, value: dataOfDay.content)
+            )
+        } else {
+            Text("No Data")
         }
     }
     
@@ -123,6 +170,12 @@ struct ContentView: View {
 
 #Preview {
     let previewContainer = try! ModelContainer(for: MLog.self)
-    return ContentView()
+    
+    let contentViewModel = ContentViewModel()
+    Task {
+        await contentViewModel.fetchData()
+    }
+    
+    return ContentView(contentViewModel: contentViewModel)
         .modelContainer(previewContainer)
 }

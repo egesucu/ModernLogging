@@ -16,6 +16,7 @@ final class AddLogViewUITests: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+        XCUIDevice.shared.orientation = .portrait
     }
 
     override func tearDownWithError() throws {
@@ -29,9 +30,9 @@ final class AddLogViewUITests: XCTestCase {
     }
     
     func testLoadImages() throws {
-        try openAddLogView()
-        
+        try testLoadImageLogic()
         let images = app.images
+        XCTAssertTrue(images.firstMatch.waitForExistence(timeout: 2))
         XCTAssertGreaterThan(images.count, 0)
     }
     
@@ -52,7 +53,9 @@ final class AddLogViewUITests: XCTestCase {
     
     func testContentEditorInteraction() throws {
         try openAddLogView()
+        
         let textEditor = app.textViews.firstMatch
+        XCTAssertTrue(textEditor.waitForExistence(timeout: 2))
         XCTAssertTrue(textEditor.exists, "Content Editor alanı bulunamadı.")
 
         textEditor.tap()
@@ -62,9 +65,9 @@ final class AddLogViewUITests: XCTestCase {
     
     func testLoadImageLogic() throws {
         try openAddLogView()
-        
         // Open Photos Picker
         let button = app.buttons["Add Photo Button"].firstMatch
+        XCTAssertTrue(button.waitForExistence(timeout: 2))
         button.tap()
             
         
@@ -79,6 +82,7 @@ final class AddLogViewUITests: XCTestCase {
             .element(matching: NSPredicate(format: "label CONTAINS[c] 'Photo'"))
             .firstMatch
 
+        XCTAssertTrue(firstImage.waitForExistence(timeout: 2))
         firstImage.tap()
         
         let doneButton = app.buttons["Add"]
@@ -88,6 +92,7 @@ final class AddLogViewUITests: XCTestCase {
         let expectedScrollView = app.scrollViews["Photo Scroll"].firstMatch
         
         let element = expectedScrollView.images.firstMatch
+        XCTAssertTrue(element.waitForExistence(timeout: 2))
         
         XCTAssertTrue(element.exists)
         
