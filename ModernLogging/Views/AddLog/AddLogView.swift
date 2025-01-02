@@ -12,16 +12,16 @@ import UIKit
 import SwiftData
 
 struct AddLogView: View {
-    
+
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) var dismiss
-    
+
     @State private var viewModel: AddLogViewModel
-    
+
     init(viewModel: AddLogViewModel) {
         self.viewModel = viewModel
     }
-    
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -41,7 +41,7 @@ struct AddLogView: View {
             )
         }
     }
-    
+
     var moodView: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -63,7 +63,7 @@ struct AddLogView: View {
         }
         .padding()
     }
-    
+
     var contentView: some View {
         VStack {
             HStack {
@@ -85,13 +85,13 @@ struct AddLogView: View {
                     }
                     .background(roundedBackground)
                     .frame(minHeight: 250)
-                    
+
                 }
                 .padding(.all)
             }
         }
     }
-    
+
     var roundedBackground: some View {
         RoundedRectangle(cornerRadius: 8)
             .fill(Color.clear)
@@ -103,7 +103,7 @@ struct AddLogView: View {
                 )
             )
     }
-    
+
     var dailyPhotoDumpView: some View {
         VStack {
             HStack {
@@ -143,7 +143,7 @@ struct AddLogView: View {
             .accessibilityIdentifier("Photo Scroll")
         }
     }
-    
+
     var saveButton: some View {
         HStack {
             Spacer()
@@ -159,7 +159,7 @@ struct AddLogView: View {
             Spacer()
         }
     }
-    
+
     func loadImages() async {
         viewModel.photos.removeAll()
         for item in viewModel.selectedItems {
@@ -172,7 +172,7 @@ struct AddLogView: View {
         }
     }
 }
-
+// swiftlint: disable force_try
 #Preview {
     let previewContainer = try! ModelContainer(for: MLog.self)
     return AddLogView(
@@ -180,3 +180,4 @@ struct AddLogView: View {
     )
         .modelContainer(previewContainer)
 }
+// swiftlint: enable force_try

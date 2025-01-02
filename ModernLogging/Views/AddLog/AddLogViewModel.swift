@@ -20,7 +20,7 @@ class AddLogViewModel {
     var mood: Mood = .happy
     var selectedItems: [PhotosPickerItem] = []
     var photos: [UIImage] = []
-    
+
     func save(context: ModelContext) {
         log = MLog(
             mood: mood,
@@ -28,14 +28,12 @@ class AddLogViewModel {
             images: map(photos),
             notes: content
         )
-        
+
         context.insert(log)
     }
-    
-    
-    
+
     private func map(_ photos: [UIImage]) -> [Data?] {
         photos.map { $0.jpegData(compressionQuality: 0.8) }
     }
-    
+
 }

@@ -14,7 +14,10 @@ import OSLog
 
 var modelContainer: ModelContainer {
     do {
-        let container = try ModelContainer(for: MLog.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+        let container = try ModelContainer(
+            for: MLog.self,
+            configurations: ModelConfiguration(isStoredInMemoryOnly: true)
+        )
         return container
     } catch {
         fatalError("Failed to create container.")
@@ -22,16 +25,16 @@ var modelContainer: ModelContainer {
 }
 
 struct AddLogViewModelTests {
-    
+
     let sut: AddLogViewModel
-    
+
     private var container: ModelContainer!
-    
+
     init() {
         self.sut = AddLogViewModel()
         container = modelContainer
     }
-    
+
     @MainActor var modelContext: ModelContext { container.mainContext }
 
     @Test func testSaving() async throws {
@@ -39,7 +42,7 @@ struct AddLogViewModelTests {
         sut.mood = .dreamy
         sut.selectedItems = []
         sut.photos = []
-        
+
         await sut.save(context: modelContext)
         let descriptor = FetchDescriptor<MLog>()
         let logs = try await modelContext.fetch(descriptor)

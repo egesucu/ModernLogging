@@ -24,7 +24,10 @@ enum Content: Decodable {
         }
 
         // Try decoding Stoic Quote
-        if let stoicData = try? container.decode(StoicQuoteResponse.self, forKey: DynamicCodingKeys(stringValue: "data")!) {
+        if let stoicData = try? container.decode(
+            StoicQuoteResponse.self,
+            forKey: DynamicCodingKeys(stringValue: "data")!
+        ) {
             self = .stoicQuote("\(stoicData.author) - \(stoicData.quote)")
             return
         }
@@ -48,11 +51,11 @@ enum Content: Decodable {
 struct DynamicCodingKeys: CodingKey {
     var stringValue: String
     var intValue: Int? { return nil }
-    
+
     init?(stringValue: String) {
         self.stringValue = stringValue
     }
-    
+
     init?(intValue: Int) {
         return nil
     }

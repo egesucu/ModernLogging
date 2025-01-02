@@ -8,15 +8,14 @@
 import Foundation
 import SwiftData
 
-
 /// A Logging Model to log users overall mood, current day, some image content and some notes.
 @Model class MLog {
-    
+
     private var moodRawValue: String
     var date: Date
     var images: [Data?]
     var notes: String?
-    
+
     var mood: Mood {
         get {
             Mood(rawValue: moodRawValue) ?? .neutral
@@ -25,7 +24,7 @@ import SwiftData
             moodRawValue = newValue.rawValue
         }
     }
-    
+
     init(
         mood: Mood,
         date: Date,
@@ -37,7 +36,7 @@ import SwiftData
         self.images = images
         self.notes = notes
     }
-    
+
     internal init(
         moodRawValue: String,
         date: Date,
@@ -49,7 +48,7 @@ import SwiftData
         self.images = images
         self.notes = notes
     }
-    
+
 }
 
 enum Mood: String, CaseIterable {

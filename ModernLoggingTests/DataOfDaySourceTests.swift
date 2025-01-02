@@ -13,9 +13,9 @@ struct DataOfDaySourceTests {
     @Test func testInitWithValidAPIURL() async {
         let validURL = "https://example.com/api/data-of-day"
         let mockBundle = MockBundle(infoDict: ["APIURL": validURL])
-        
+
         async let source = DataOfDaySource(bundle: mockBundle)
-                
+
         await #expect(source.url != nil)
         await #expect(source.url?.absoluteString == validURL)
     }
@@ -24,7 +24,7 @@ struct DataOfDaySourceTests {
     @Test func testInitWithInvalidAPIURL() async {
         let invalidURL = "invalidurl"
         let mockBundle = MockBundle(infoDict: ["APIURL": invalidURL])
-        
+
         let source = DataOfDaySource(bundle: mockBundle)
         let output = source.url
         #expect(output == nil)
@@ -33,12 +33,12 @@ struct DataOfDaySourceTests {
     @MainActor
     @Test func testInitWithNoAPIURL() async {
         let mockBundle = MockBundle(infoDict: [:])
-        
+
         let source = DataOfDaySource(bundle: mockBundle)
-        
+
         #expect(source.url == nil, "URL should be nil when APIURL is not present in Info.plist")
     }
-    
+
     @MainActor
     @Test func testFetchDataWithValidURL() async throws {
         let validJSON = """
@@ -51,14 +51,15 @@ struct DataOfDaySourceTests {
                 }
             ]
         }
-        """.data(using: .utf8)!
-        
+        """
+        let data = Data(validJSON.utf8)
+
         let url = URL(string: "https://example.com/api/data-of-day")!
-        URLProtocolMock.mockResponse(for: url, data: validJSON, statusCode: 200)
-        
+        URLProtocolMock.mockResponse(for: url, data: data, statusCode: 200)
+
         let source = DataOfDaySource()
         source.url = url
-        
+
         do {
             let content = try await source.fetchData()
             #expect(content == nil)
@@ -71,21 +72,22 @@ struct DataOfDaySourceTests {
             #expect(Bool(false), "fetchData threw an unexpected error: \(error)")
         }
     }
-    
+
     @MainActor
     @Test func testFetchDataWithInvalidResponse() async throws {
         let invalidJSON = """
         {
             "unknown": "This key is not handled"
         }
-        """.data(using: .utf8)!
-        
+        """
+        let data = Data(invalidJSON.utf8)
+
         let url = URL(string: "https://example.com/api/data-of-day")!
-        URLProtocolMock.mockResponse(for: url, data: invalidJSON, statusCode: 200)
-        
+        URLProtocolMock.mockResponse(for: url, data: data, statusCode: 200)
+
         let source = DataOfDaySource()
         source.url = url
-        
+
         do {
             let content = try await source.fetchData()
             #expect(content == nil, "Content should be nil for invalid JSON response")
@@ -98,7 +100,7 @@ struct DataOfDaySourceTests {
     @Test func testFetchDataWithNoURL() async {
         let source = DataOfDaySource()
         source.url = nil
-        
+
         do {
             let data = try await source.fetchData()
             #expect(data == nil, "Expected .noURL error but no error was thrown")
@@ -108,14 +110,14 @@ struct DataOfDaySourceTests {
             #expect(Bool(false), "Unexpected error thrown: \(error)")
         }
     }
-    
+
     @MainActor
     @Test func testFetchWithURL() async {
         let workingURL = URL(string: "https://www.google.com")!
         let source = DataOfDaySource(url: workingURL)
-        
+
         #expect(source.url != nil)
-        
+
     }
 }
 
@@ -125,12 +127,12 @@ extension MockBundle: @unchecked Sendable { }
 
 final class MockBundle: Bundle {
     private let mockInfoDict: [String: Any]
-    
+
     init(infoDict: [String: Any]) {
         self.mockInfoDict = infoDict
         super.init()
     }
-    
+
     override func object(forInfoDictionaryKey key: String) -> Any? {
         return mockInfoDict[key]
     }
@@ -138,33 +140,38 @@ final class MockBundle: Bundle {
 
 private class URLProtocolMock: URLProtocol {
     static var mockResponses: [URL: (data: Data?, statusCode: Int)] = [:]
-    
+
     static func mockResponse(for url: URL, data: Data?, statusCode: Int) {
         mockResponses[url] = (data, statusCode)
     }
-    
+
     override class func canInit(with request: URLRequest) -> Bool {
         return mockResponses.keys.contains(request.url!)
     }
-    
+
     override class func canonicalRequest(for request: URLRequest) -> URLRequest {
         return request
     }
-    
+
     override func startLoading() {
         guard let url = request.url,
               let response = URLProtocolMock.mockResponses[url] else {
             client?.urlProtocol(self, didFailWithError: URLError(.badURL))
             return
         }
-        
-        let httpResponse = HTTPURLResponse(url: url, statusCode: response.statusCode, httpVersion: nil, headerFields: nil)!
+
+        let httpResponse = HTTPURLResponse(
+            url: url,
+            statusCode: response.statusCode,
+            httpVersion: nil,
+            headerFields: nil
+        )!
         client?.urlProtocol(self, didReceive: httpResponse, cacheStoragePolicy: .notAllowed)
         if let data = response.data {
             client?.urlProtocol(self, didLoad: data)
         }
         client?.urlProtocolDidFinishLoading(self)
     }
-    
+
     override func stopLoading() {}
 }

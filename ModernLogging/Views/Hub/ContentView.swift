@@ -9,11 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    
+
     @Query(sort: \MLog.date, order: .reverse) var logs: [MLog]
     @Environment(\.modelContext) var modelContext
     @State var contentViewModel = ContentViewModel()
-    
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -80,7 +80,7 @@ struct ContentView: View {
             await contentViewModel.fetchData()
         }
     }
-    
+
     @ViewBuilder
     func previewImageOverlay() -> some View {
         if let image = contentViewModel.selectedImage {
@@ -98,7 +98,7 @@ struct ContentView: View {
             .animation(.smooth, value: contentViewModel.selectedImage)
         }
     }
-    
+
     @ViewBuilder
     func previewImageView(log: MLog) -> some View {
         ScrollView(.horizontal) {
@@ -120,7 +120,7 @@ struct ContentView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func dataOfDayView() -> some View {
         if let dataOfDay = contentViewModel.dataOfDay {
@@ -155,27 +155,28 @@ struct ContentView: View {
             Text("No Data")
         }
     }
-    
+
     private func removeLogs(from indexSet: IndexSet) {
         for index in indexSet {
             let log = logs[index]
             removeLog(log)
         }
     }
-    
+
     private func removeLog(_ log: MLog) {
         modelContext.delete(log)
     }
 }
-
+// swiftlint: disable force_try
 #Preview {
     let previewContainer = try! ModelContainer(for: MLog.self)
-    
+
     let contentViewModel = ContentViewModel()
     Task {
         await contentViewModel.fetchData()
     }
-    
+
     return ContentView(contentViewModel: contentViewModel)
         .modelContainer(previewContainer)
 }
+// swiftlint: enable force_try

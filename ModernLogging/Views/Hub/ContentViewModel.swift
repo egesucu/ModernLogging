@@ -13,13 +13,13 @@ import OSLog
 @Observable
 @MainActor
 final class ContentViewModel {
-    
+
     let source = DataOfDaySource()
     var selectedImage: UIImage?
     var openAddLog = false
-    
+
     var dataOfDay: Content?
-    
+
     @MainActor
     func fetchData() async {
         do {

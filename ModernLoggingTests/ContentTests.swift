@@ -6,10 +6,11 @@
 //
 
 import Testing
+import Foundation
 @testable import ModernLogging
 
 struct ContentTests {
-    
+
     @Test func testDecodeDogFact() {
         let jsonData = """
         {
@@ -21,9 +22,10 @@ struct ContentTests {
                 }
             ]
         }
-        """.data(using: .utf8)!
-        
-        if let content = decodeContent(from: jsonData) {
+        """
+        let data = Data(jsonData.utf8)
+
+        if let content = decodeContent(from: data) {
             switch content {
             case .dogFact(let fact):
                 #expect(fact == "Dogs wag their tails when they are happy.")
@@ -36,7 +38,7 @@ struct ContentTests {
             #expect(Bool(false), "Failed to decode JSON")
         }
     }
-    
+
     @Test func testDecodeStoicQuote() {
         let jsonData = """
         {
@@ -45,9 +47,11 @@ struct ContentTests {
                 "quote": "The best revenge is not to be like your enemy."
             }
         }
-        """.data(using: .utf8)!
-        
-        if let content = decodeContent(from: jsonData) {
+        """
+
+        let data = Data(jsonData.utf8)
+
+        if let content = decodeContent(from: data) {
             switch content {
             case .stoicQuote(let quote):
                 #expect(quote == "Marcus Aurelius - The best revenge is not to be like your enemy.")
@@ -60,15 +64,16 @@ struct ContentTests {
             #expect(Bool(false), "Failed to decode JSON")
         }
     }
-    
+
     @Test func testDecodeUselessAdvice() {
         let jsonData = """
         {
             "text": "Always lick the spoon."
         }
-        """.data(using: .utf8)!
-        
-        if let content = decodeContent(from: jsonData) {
+        """
+        let data = Data(jsonData.utf8)
+
+        if let content = decodeContent(from: data) {
             switch content {
             case .uselessAdvice(let advice):
                 #expect(advice == "Always lick the spoon.")
@@ -78,25 +83,27 @@ struct ContentTests {
                 #expect(Bool(false), "Expected .uselessAdvice but got \(content)")
             }
         } else {
-            #expect(Bool(false),"Failed to decode JSON")
+            #expect(Bool(false), "Failed to decode JSON")
         }
     }
-    
+
     @Test func testDecodeInvalidJSON() {
         let jsonData = """
         {
             "unknown": "This key is not handled"
         }
-        """.data(using: .utf8)!
-        
-        let content = decodeContent(from: jsonData)
+        """
+        let data = Data(jsonData.utf8)
+
+        let content = decodeContent(from: data)
         #expect(content == nil, "Decoding should fail for invalid JSON structure")
     }
-    
+
     @Test func testDecodeEmptyJSON() {
-        let jsonData = "{}".data(using: .utf8)!
-        
-        let content = decodeContent(from: jsonData)
+        let jsonData = "{}"
+        let data = Data(jsonData.utf8)
+
+        let content = decodeContent(from: data)
         #expect(content == nil, "Decoding should fail for empty JSON")
     }
 }

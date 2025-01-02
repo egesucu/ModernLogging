@@ -13,7 +13,7 @@ struct AccessibilityIdentifiers {
         "Log Item \(item)"
     }
     static let addLogButton = "AddLogButton"
-    
+
     // MARK: - Add Log View
     static let addLogView = "AddLogView"
     static let addLogPicker = "AddLogPicker"

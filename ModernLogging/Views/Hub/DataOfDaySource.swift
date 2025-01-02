@@ -13,7 +13,7 @@ import UIKit
 final class DataOfDaySource {
     private let bundle: Bundle
     var url: URL?
-    
+
     init(bundle: Bundle = .main, url: URL? = nil) {
         self.bundle = bundle
         if let url = url {
@@ -24,14 +24,14 @@ final class DataOfDaySource {
                 return
             }
             if let url = URL(string: apiURL),
-               UIApplication.shared.canOpenURL(url){
+               UIApplication.shared.canOpenURL(url) {
                 self.url = url
             } else {
                 self.url = nil
             }
         }
     }
-    
+
     func fetchData() async throws(DataOfDayError) -> Content? {
         if let url {
             do {
@@ -45,7 +45,7 @@ final class DataOfDaySource {
             throw .noURL
         }
     }
-    
+
 }
 
 enum DataOfDayError: Error {

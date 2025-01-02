@@ -1,25 +1,25 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <testsuites name='ModernLoggingUITests.xctest' tests='14' failures='0'>
   <testsuite name='ModernLoggingUITests.AddLogViewUITests' tests='5' failures='0'>
-    <testcase classname='ModernLoggingUITests.AddLogViewUITests' name='testContentEditorInteraction' time='8.002'/>
-    <testcase classname='ModernLoggingUITests.AddLogViewUITests' name='testLoadImageLogic' time='11.507'/>
-    <testcase classname='ModernLoggingUITests.AddLogViewUITests' name='testLoadImages' time='11.211'/>
-    <testcase classname='ModernLoggingUITests.AddLogViewUITests' name='testMoodPickerSelection' time='6.225'/>
-    <testcase classname='ModernLoggingUITests.AddLogViewUITests' name='testSaveButtonFunctionality' time='8.499'/>
+    <testcase classname='ModernLoggingUITests.AddLogViewUITests' name='testContentEditorInteraction' time='8.735'/>
+    <testcase classname='ModernLoggingUITests.AddLogViewUITests' name='testLoadImageLogic' time='11.926'/>
+    <testcase classname='ModernLoggingUITests.AddLogViewUITests' name='testLoadImages' time='11.485'/>
+    <testcase classname='ModernLoggingUITests.AddLogViewUITests' name='testMoodPickerSelection' time='5.749'/>
+    <testcase classname='ModernLoggingUITests.AddLogViewUITests' name='testSaveButtonFunctionality' time='8.588'/>
   </testsuite>
   <testsuite name='ModernLoggingUITests.ContentViewUITests' tests='3' failures='0'>
-    <testcase classname='ModernLoggingUITests.ContentViewUITests' name='testAddButtonExists' time='4.534'/>
-    <testcase classname='ModernLoggingUITests.ContentViewUITests' name='testAddButtonTap' time='5.264'/>
-    <testcase classname='ModernLoggingUITests.ContentViewUITests' name='testLaunchPerformance' time='3.346'/>
+    <testcase classname='ModernLoggingUITests.ContentViewUITests' name='testAddButtonExists' time='4.572'/>
+    <testcase classname='ModernLoggingUITests.ContentViewUITests' name='testAddButtonTap' time='5.347'/>
+    <testcase classname='ModernLoggingUITests.ContentViewUITests' name='testLaunchPerformance' time='3.503'/>
   </testsuite>
   <testsuite name='ModernLoggingUITests.ModernLoggingUITests' tests='2' failures='0'>
-    <testcase classname='ModernLoggingUITests.ModernLoggingUITests' name='testExample' time='3.391'/>
-    <testcase classname='ModernLoggingUITests.ModernLoggingUITests' name='testLaunchPerformance' time='20.025'/>
+    <testcase classname='ModernLoggingUITests.ModernLoggingUITests' name='testExample' time='3.414'/>
+    <testcase classname='ModernLoggingUITests.ModernLoggingUITests' name='testLaunchPerformance' time='20.256'/>
   </testsuite>
   <testsuite name='ModernLoggingUITests.ModernLoggingUITestsLaunchTests' tests='4' failures='0'>
-    <testcase classname='ModernLoggingUITests.ModernLoggingUITestsLaunchTests' name='testLaunch' time='4.084'/>
-    <testcase classname='ModernLoggingUITests.ModernLoggingUITestsLaunchTests' name='testLaunch' time='3.810'/>
-    <testcase classname='ModernLoggingUITests.ModernLoggingUITestsLaunchTests' name='testLaunch' time='3.859'/>
-    <testcase classname='ModernLoggingUITests.ModernLoggingUITestsLaunchTests' name='testLaunch' time='3.922'/>
+    <testcase classname='ModernLoggingUITests.ModernLoggingUITestsLaunchTests' name='testLaunch' time='4.161'/>
+    <testcase classname='ModernLoggingUITests.ModernLoggingUITestsLaunchTests' name='testLaunch' time='4.028'/>
+    <testcase classname='ModernLoggingUITests.ModernLoggingUITestsLaunchTests' name='testLaunch' time='4.624'/>
+    <testcase classname='ModernLoggingUITests.ModernLoggingUITestsLaunchTests' name='testLaunch' time='4.186'/>
   </testsuite>
 </testsuites>

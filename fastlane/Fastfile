@@ -9,4 +9,9 @@ platform :ios do
   lane :build_and_test do
     run_tests(scheme: "ModernLogging-DEV")
   end
+
+  desc "Check Code Quality"
+  lane :lint do
+    swiftlint
+  end
 end
