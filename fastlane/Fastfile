@@ -1,0 +1,16 @@
+opt_out_usage
+update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :build_and_test do
+    run_tests(scheme: "ModernLogging-DEV")
+  end
+
+  desc "Check Code Quality"
+  lane :lint do
+    swiftlint
+  end
+end
