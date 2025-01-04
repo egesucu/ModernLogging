@@ -69,15 +69,16 @@ platform :ios do
     )
 
     version = get_version_number(xcodeproj: "ModernLogging.xcodeproj")
+    build_number = get_build_number(xcodeproj: "ModernLogging.xcodeproj")
 
     set_github_release(
       repository_name: "egesucu/ModernLogging",
       api_token: ENV["GITHUB_TOKEN"],
       name: "New Version Available!",
-      tag_name: "#{version}-DEV",
+      tag_name: "#{version}(#{build_number})-DEV",
       description: "No changelog provided",
       commitish: "main",
-      upload_assets: ["ModernLogging-DEV.ipa"]
+      upload_assets: ["TEMP/ModernLogging-DEV.ipa"]
     )
 
   end
@@ -96,16 +97,17 @@ platform :ios do
       include_bitcode: false
     )
 
-    version = get_version_number(xcodeproj: ENV['XCODE_PROJECT_FILE'])
+    version = get_version_number(xcodeproj: "ModernLogging.xcodeproj")
+    build_number = get_build_number(xcodeproj: "ModernLogging.xcodeproj")
 
     set_github_release(
       repository_name: "egesucu/ModernLogging",
       api_token: ENV["GITHUB_TOKEN"],
       name: "New Version Available!",
-      tag_name: "#{version}",
+      tag_name: "#{version}(#{build_number})",
       description: "No changelog provided",
       commitish: "main",
-      upload_assets: ["ModernLogging.ipa"]
+      upload_assets: ["TEMP/ModernLogging.ipa"]
     )
   end
 end
