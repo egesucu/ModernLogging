@@ -72,7 +72,6 @@ platform :ios do
       key_id: ENV["APP_STORE_CONNECT_API_KEY_KEY_ID"],
       issuer_id: ENV["APP_STORE_CONNECT_API_KEY_ISSUER_ID"],
       key_content: ENV["APP_STORE_CONNECT_API_KEY_KEY"],
-      is_key_content_base64: true,
       in_house: false
     )
 
@@ -85,8 +84,7 @@ platform :ios do
       export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
       silent: true,
       suppress_xcode_output: false,
-      include_bitcode: false,
-      export_xcargs: "-allowProvisioningUpdates"
+      include_bitcode: false
     )
 
     version = get_version_number(xcodeproj: ENV['XCODE_PROJECT_FILE'])
