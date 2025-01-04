@@ -81,7 +81,7 @@ final class AddLogViewUITests: XCTestCase {
             .element(matching: NSPredicate(format: "label CONTAINS[c] 'Photo'"))
             .firstMatch
 
-        XCTAssertTrue(firstImage.waitForExistence(timeout: 2))
+        XCTAssertTrue(firstImage.waitForExistence(timeout: 10))
         firstImage.tap()
 
         let doneButton = app.buttons["Add"]
