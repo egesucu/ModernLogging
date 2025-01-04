@@ -39,6 +39,7 @@ jobs:
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           GITHUB_TOKEN: ${{ secrets.GHB_TOKEN }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
       - name: Deploy PROD
         run: |
           bundle exec fastlane build_and_distribute --env prod
@@ -46,5 +47,6 @@ jobs:
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           GITHUB_TOKEN: ${{ secrets.GHB_TOKEN }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
       - name: Remove Leftovers
         run: bundle exec fastlane remove_leftovers
