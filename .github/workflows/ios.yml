@@ -32,7 +32,7 @@ jobs:
           security default-keychain -s build.keychain
           security unlock-keychain -p "$IDENTITY_PASSPHRASE" build.keychain
           security import dev_certificate.p12 -k build.keychain -P "$CERT_PASSWORD" -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$IDENTITY_PASSPHRASE" build.keychain
         env:
           DEVELOPMENT_CERTIFICATE: ${{ secrets.DIST_CERT }}
           CERT_PASSWORD: ${{ secrets.DIST_PASS }}
