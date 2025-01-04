@@ -74,7 +74,7 @@ platform :ios do
     set_github_release(
       repository_name: "egesucu/ModernLogging",
       api_token: ENV["GITHUB_TOKEN"],
-      name: "New Version Available!",
+      name: "#{version}(#{build_number})-DEV",
       tag_name: "#{version}(#{build_number})-DEV",
       description: "No changelog provided",
       commitish: "main",
@@ -103,7 +103,7 @@ platform :ios do
     set_github_release(
       repository_name: "egesucu/ModernLogging",
       api_token: ENV["GITHUB_TOKEN"],
-      name: "New Version Available!",
+      name: "#{version}(#{build_number})",
       tag_name: "#{version}(#{build_number})",
       description: "No changelog provided",
       commitish: "main",
