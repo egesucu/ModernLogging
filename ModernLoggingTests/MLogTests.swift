@@ -50,11 +50,9 @@ class MLogTests {
 
     @Test func testMoodDefaultsToNeutral() async throws {
         let log = MLog(moodRawValue: "invalid", date: .now)
-
         #expect(log.mood == .neutral)
         log.mood = .content
         #expect(log.mood == .content)
-
     }
 
     @Test func testMoodIdentifiableConformance() async throws {

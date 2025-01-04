@@ -39,3 +39,12 @@ jobs:
           platform: ${{ 'iOS Simulator' }}
         run: |
           bundle exec fastlane lint
+      - name: Deploy
+        env:
+        run: |
+          
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_IOS_APP_ID: ${{ secrets.FIREBASE_IOS_APP_ID }}
+          FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

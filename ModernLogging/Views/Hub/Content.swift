@@ -9,7 +9,6 @@ import Foundation
 
 enum Content: Decodable {
     case dogFact(String)
-    case stoicQuote(String)
     case uselessAdvice(String)
 
     init(from decoder: Decoder) throws {
@@ -21,15 +20,6 @@ enum Content: Decodable {
                 self = .dogFact(firstFact.attributes.body)
                 return
             }
-        }
-
-        // Try decoding Stoic Quote
-        if let stoicData = try? container.decode(
-            StoicQuoteResponse.self,
-            forKey: DynamicCodingKeys(stringValue: "data")!
-        ) {
-            self = .stoicQuote("\(stoicData.author) - \(stoicData.quote)")
-            return
         }
 
         // Try decoding Useless Advice
@@ -85,8 +75,6 @@ extension Content {
         switch self {
         case .dogFact:
             return "Today's Dog Fact"
-        case .stoicQuote:
-            return "Today's Stoic Quote"
         case .uselessAdvice:
             return "Useless Advice"
         }
@@ -95,7 +83,6 @@ extension Content {
     var content: String {
         switch self {
         case .dogFact(let string),
-             .stoicQuote(let string),
              .uselessAdvice(let string):
             return string
         }
