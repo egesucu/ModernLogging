@@ -4,3 +4,5 @@ app_identifier(["tr.com.egesucu.ModernLogging", "tr.com.egesucu.ModernLogging.de
 username("egesucu@icloud.com")
 git_basic_authorization(ENV['MATCH_GIT_BASIC_AUTHORIZATION'])
 keychain_name("CIKeychain.keychain")
+keychain_password(ENV['KEYCHAIN_PASS'])
+verbose(true)
