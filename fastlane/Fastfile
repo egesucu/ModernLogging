@@ -17,7 +17,7 @@ platform :ios do
   desc "Keychain and signing actions"
   lane :setup_keychain do
     create_keychain(
-      name: "KeychainName",
+      name: "CIKeychain",
       default_keychain: true,
       password: ENV['KEYCHAIN_PASS'],
       unlock: true,

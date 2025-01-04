@@ -25,6 +25,8 @@ jobs:
         run: mkdir TEMP
       - name: Setup CI
         run: bundle exec fastlane setup_keychain
+        env:
+          KEYCHAIN_PASS: ${{ secrets.KEYCHAIN_PASS }}
       - name: Lint
         run: |
           bundle exec fastlane lint
