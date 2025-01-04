@@ -35,7 +35,6 @@ platform :ios do
     match(type: "development")
 
     match(type: "adhoc")
-
   end
 
   desc "Removes the leftover files"
