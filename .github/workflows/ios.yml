@@ -24,7 +24,7 @@ jobs:
       - name: Create TEMP folder
         run: mkdir TEMP
       - name: Setup CI
-        run: bundle exec fastlane run setup_ci
+        run: bundle exec fastlane setup_keychain
       - name: Lint
         run: |
           bundle exec fastlane lint
