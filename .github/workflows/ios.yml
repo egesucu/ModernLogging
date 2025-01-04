@@ -26,11 +26,11 @@ jobs:
       - name: Decode Certificate
         run: |
           echo "$DEVELOPMENT_CERTIFICATE" | base64 --decode > dev_certificate.p12
-          security create-keychain -p "" build.keychain
-          security import dev_certificate.p12 -k build.keychain -P "$CERT_PASSWORD" -T /usr/bin/codesign
-          security default-keychain -s build.keychain
-          security unlock-keychain -p "" build.keychain
-          security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
+          ls -lh dev_certificate.p12
+          file dev_certificate.p12
+          security import dev_certificate.p12 -k login.keychain -P "$CERT_PASSWORD" -T /usr/bin/codesign
+          security unlock-keychain -p "" login.keychain
+          security set-key-partition-list -S apple-tool:,apple: -s -k "" login.keychain
         env:
           DEVELOPMENT_CERTIFICATE: ${{ secrets.DIST_CERT }}
           CERT_PASSWORD: ${{ secrets.DIST_PASS }}
