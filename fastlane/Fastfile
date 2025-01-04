@@ -43,7 +43,8 @@ platform :ios do
       export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
       silent: true,
       suppress_xcode_output: false,
-      include_bitcode: false
+      include_bitcode: false,
+      export_xcargs: "-allowProvisioningUpdates"
     )
 
     version = get_version_number(xcodeproj: ENV['XCODE_PROJECT_FILE'])
@@ -77,7 +78,8 @@ platform :ios do
       export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
       silent: true,
       suppress_xcode_output: false,
-      include_bitcode: false
+      include_bitcode: false,
+      export_xcargs: "-allowProvisioningUpdates"
     )
 
     version = get_version_number(xcodeproj: ENV['XCODE_PROJECT_FILE'])
