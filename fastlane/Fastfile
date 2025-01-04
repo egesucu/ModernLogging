@@ -28,7 +28,6 @@ platform :ios do
   lane :build_and_deploy do
     increment_build_number
     commit_version_bump
-    match
 
     api_key = app_store_connect_api_key(
       key_id: ENV["APP_STORE_CONNECT_API_KEY_KEY_ID"],
@@ -38,9 +37,10 @@ platform :ios do
       in_house: false
     )
 
+    match(api_key: api_key)
+
     gym(
       output_directory: "TEMP",
-      api_key: api_key,
       output_name: ENV['XCODE_SCHEME'],
       scheme: ENV['XCODE_SCHEME'],
       export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
@@ -76,9 +76,10 @@ platform :ios do
       in_house: false
     )
 
+    match(api_key: api_key)
+
     gym(
       output_directory: "TEMP",
-      api_key: api_key,
       output_name: ENV['XCODE_SCHEME'],
       scheme: ENV['XCODE_SCHEME'],
       export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
