@@ -1,1 +1,7 @@
 TEMP
+Gemfile.lock
+fastlane/README.md
+fastlane/report.xml
+dev.mobileprovision
+dev_certificate.p12
+prod.mobileprovision
