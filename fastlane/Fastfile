@@ -17,8 +17,6 @@ platform :ios do
   desc "Removes the leftover files"
   lane :remove_leftovers do
     sh("rm -rf TEMP")
-    sh("rm -rf dev.mobileprovision")
-    sh("rm -rf prod.mobileprovision")
   end
 
   desc "Check Code Quality"
@@ -30,11 +28,7 @@ platform :ios do
   lane :build_and_deploy do
     increment_build_number
     commit_version_bump
-
-    update_code_signing_settings(
-      use_automatic_signing: true,
-      path: "ModernLogging.xcodeproj"
-    )
+    match
 
     gym(
       output_directory: "TEMP",
@@ -43,8 +37,7 @@ platform :ios do
       export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
       silent: true,
       suppress_xcode_output: false,
-      include_bitcode: false,
-      export_xcargs: "-allowProvisioningUpdates"
+      include_bitcode: false
     )
 
     version = get_version_number(xcodeproj: ENV['XCODE_PROJECT_FILE'])
@@ -65,11 +58,6 @@ platform :ios do
   lane :build_and_distribute do
     increment_build_number
     commit_version_bump
-
-    update_code_signing_settings(
-      use_automatic_signing: true,
-      path: "ModernLogging.xcodeproj"
-    )
 
     gym(
       output_directory: "TEMP",
@@ -94,15 +82,4 @@ platform :ios do
       upload_assets: ["ModernLogging.ipa"]
     )
   end
-
-  desc "Installs dev provisional profile"
-  lane :install_dev_profile do
-    install_provisioning_profile(path: "dev.mobileprovision")
-  end
-
-  desc "Installs prod provisional profile"
-  lane :install_prod_profile do
-    install_provisioning_profile(path: "prod.mobileprovision")
-  end
-
 end

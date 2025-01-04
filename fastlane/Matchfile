@@ -1,0 +1,5 @@
+git_url("git@github.com:egesucu/ML-Cert.git")
+storage_mode("git")
+type("adhoc")
+app_identifier(["tr.com.egesucu.ModernLogging", "tr.com.egesucu.ModernLogging.dev"])
+username("egesucu@icloud.com")

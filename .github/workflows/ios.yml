@@ -22,29 +22,9 @@ jobs:
       - name: Install Gems
         run: bundle install --jobs 4 --retry 3
       - name: Create TEMP folder
-        run: bundle exec fastlane create_temp
-      - name: Decode Certificate
-        run: |
-          echo "$DEVELOPMENT_CERTIFICATE" | base64 --decode > dev_certificate.p12
-          ls -lh dev_certificate.p12
-          file dev_certificate.p12
-          security create-keychain -p "$CERT_PASSWORD" build.keychain
-          security default-keychain -s build.keychain
-          security unlock-keychain -p "$CERT_PASSWORD" build.keychain
-          security import dev_certificate.p12 -k build.keychain -P "$CERT_PASSWORD" -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple: -s -k "$CERT_PASSWORD" build.keychain
-        env:
-          DEVELOPMENT_CERTIFICATE: ${{ secrets.DIST_CERT }}
-          CERT_PASSWORD: ${{ secrets.DIST_PASS }}
-      - name: Decode and Install Provisioning Profile
-        run: |
-          echo "$DEV_PROVISION" | base64 --decode > dev.mobileprovision
-          fastlane run install_provisioning_profile path:dev.mobileprovision
-          echo "$PROD_PROVISION" | base64 --decode > prod.mobileprovision
-          fastlane run install_provisioning_profile path:prod.mobileprovision
-        env:
-          DEV_PROVISION: ${{ secrets.DEV_PROVISION }}
-          PROD_PROVISION: ${{ secrets.PROD_PROVISION }}
+        run: mkdir TEMP
+      - name: Setup CI
+        run: bundle exec fastlane run setup_ci
       - name: Lint
         run: |
           bundle exec fastlane lint
@@ -57,10 +37,12 @@ jobs:
           bundle exec fastlane build_and_deploy --env development
         env:
           GITHUB_TOKEN: ${{ secrets.GHB_TOKEN }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
       - name: Deploy PROD
         run: |
           bundle exec fastlane build_and_distribute --env prod
         env:
           GITHUB_TOKEN: ${{ secrets.GHB_TOKEN }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
       - name: Remove Leftovers
         run: bundle exec fastlane remove_leftovers
