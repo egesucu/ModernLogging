@@ -88,6 +88,12 @@ platform :ios do
       output_name: ENV['XCODE_SCHEME'],
       scheme: ENV['XCODE_SCHEME'],
       export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
+      export_options: {
+        provisioningProfiles: {
+          "tr.com.egesucu.ModernLogging" => "match AdHoc tr.com.egesucu.ModernLogging",
+          "tr.com.egesucu.ModernLogging.dev" => "match AdHoc tr.com.egesucu.ModernLogging.dev"
+        }
+      },
       silent: true,
       suppress_xcode_output: false,
       include_bitcode: false
