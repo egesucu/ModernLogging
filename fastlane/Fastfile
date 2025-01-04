@@ -49,8 +49,6 @@ platform :ios do
 
   desc "Build the app, and send the dev build into github actions"
   lane :build_and_deploy do
-    increment_build_number
-    commit_version_bump
 
     gym(
       output_directory: "TEMP",
@@ -85,8 +83,6 @@ platform :ios do
 
   desc "Build and send the prod build into Github Actions"
   lane :build_and_distribute do
-    increment_build_number
-    commit_version_bump
     gym(
       output_directory: "TEMP",
       output_name: ENV['XCODE_SCHEME'],
