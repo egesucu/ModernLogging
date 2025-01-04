@@ -71,7 +71,7 @@ platform :ios do
     version = get_version_number(xcodeproj: "ModernLogging.xcodeproj")
 
     set_github_release(
-      repository_name: "fastlane/fastlane",
+      repository_name: "egesucu/ModernLogging",
       api_token: ENV["GITHUB_TOKEN"],
       name: "New Version Available!",
       tag_name: "#{version}-DEV",
