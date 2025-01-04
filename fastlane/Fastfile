@@ -30,8 +30,17 @@ platform :ios do
     commit_version_bump
     match
 
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_API_KEY_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_API_KEY_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_API_KEY_KEY"],
+      is_key_content_base64: true,
+      in_house: false
+    )
+
     gym(
       output_directory: "TEMP",
+      api_key: api_key,
       output_name: ENV['XCODE_SCHEME'],
       scheme: ENV['XCODE_SCHEME'],
       export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
@@ -59,8 +68,17 @@ platform :ios do
     increment_build_number
     commit_version_bump
 
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_API_KEY_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_API_KEY_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_API_KEY_KEY"],
+      is_key_content_base64: true,
+      in_house: false
+    )
+
     gym(
       output_directory: "TEMP",
+      api_key: api_key,
       output_name: ENV['XCODE_SCHEME'],
       scheme: ENV['XCODE_SCHEME'],
       export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
