@@ -6,11 +6,89 @@ default_platform(:ios)
 platform :ios do
   desc "Description of what the lane does"
   lane :build_and_test do
-    run_tests(scheme: "ModernLogging-DEV")
+    scan(scheme: ENV['XCODE_SCHEME'])
+  end
+
+  desc "Creates a temporary folder to store ipa files."
+  lane :create_temp do
+    sh("mkdir TEMP")
+  end
+
+  desc "Removes the leftover files"
+  lane :remove_leftovers do
+    sh("rm -rf TEMP")
+    sh("rm -rf dev.mobileprovision")
+    sh("rm -rf prod.mobileprovision")
   end
 
   desc "Check Code Quality"
   lane :lint do
     swiftlint
   end
+
+  desc "Build the app, and send the dev build into github actions"
+  lane :build_and_deploy do
+    increment_build_number
+    commit_version_bump
+    gym(
+      output_directory: "TEMP",
+      output_name: ENV['XCODE_SCHEME'],
+      scheme: ENV['XCODE_SCHEME'],
+      export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
+      silent: true,
+      suppress_xcode_output: false,
+      include_bitcode: false
+    )
+
+    version = get_version_number(xcodeproj: ENV['XCODE_PROJECT_FILE'])
+
+    set_github_release(
+      repository_name: "fastlane/fastlane",
+      api_token: ENV["GITHUB_TOKEN"],
+      name: "New Version Available!",
+      tag_name: "#{version}-DEV",
+      description: "No changelog provided",
+      commitish: "main",
+      upload_assets: ["ModernLogging-DEV.ipa"]
+    )
+
+  end
+
+  desc "Build and send the prod build into Github Actions"
+  lane :build_and_distribute do
+    increment_build_number
+    commit_version_bump
+    gym(
+      output_directory: "TEMP",
+      output_name: ENV['XCODE_SCHEME'],
+      scheme: ENV['XCODE_SCHEME'],
+      export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
+      silent: true,
+      suppress_xcode_output: false,
+      include_bitcode: false
+    )
+
+    version = get_version_number(xcodeproj: ENV['XCODE_PROJECT_FILE'])
+
+    set_github_release(
+      repository_name: "egesucu/ModernLogging",
+      api_token: ENV["GITHUB_TOKEN"],
+      name: "New Version Available!",
+      tag_name: "#{version}",
+      description: "No changelog provided",
+      commitish: "main",
+      upload_assets: ["ModernLogging.ipa"]
+    )
+  end
+
+  desc "Installs dev provisional profile"
+  lane :install_dev_profile do
+    install_provisioning_profile(path: "dev.mobileprovision")
+  end
+
+  desc "Installs prod provisional profile"
+  lane :install_prod_profile do
+    install_provisioning_profile(path: "prod.mobileprovision")
+  end
+
 end

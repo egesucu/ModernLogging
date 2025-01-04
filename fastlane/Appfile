@@ -1,8 +1,2 @@
-app_identifier("tr.com.egesucu.ModernLogging") # The bundle identifier of your app
-apple_id("egesucu@icloud.com") # Your Apple Developer Portal username
-
-itc_team_id("118813573") # App Store Connect Team ID
-team_id("RKA7R98LN8") # Developer Portal Team ID
-
-# For more information about the Appfile, see:
-#     https://docs.fastlane.tools/advanced/#appfile
+apple_id ENV["FASTLANE_APPLE_ID"]
+team_id "RKA7R98LN8"

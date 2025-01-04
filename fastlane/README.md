@@ -23,6 +23,22 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Description of what the lane does
 
+### ios create_temp
+
+```sh
+[bundle exec] fastlane ios create_temp
+```
+
+Creates a temporary folder to store ipa files.
+
+### ios remove_temp
+
+```sh
+[bundle exec] fastlane ios remove_temp
+```
+
+Removes the temporary created folder
+
 ### ios lint
 
 ```sh
@@ -30,6 +46,22 @@ Description of what the lane does
 ```
 
 Check Code Quality
+
+### ios build_and_deploy
+
+```sh
+[bundle exec] fastlane ios build_and_deploy
+```
+
+Build the app, and send the dev build into github actions
+
+### ios build_and_distribute
+
+```sh
+[bundle exec] fastlane ios build_and_distribute
+```
+
+Build and send the prod build into Github Actions
 
 ----
 
