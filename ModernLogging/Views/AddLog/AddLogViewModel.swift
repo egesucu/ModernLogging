@@ -28,7 +28,6 @@ class AddLogViewModel {
             images: map(photos),
             notes: content
         )
-
         context.insert(log)
     }
 

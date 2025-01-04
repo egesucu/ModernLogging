@@ -52,10 +52,10 @@ struct AddLogView: View {
                 Picker("Mood", selection: $viewModel.mood) {
                     ForEach(Mood.allCases) { selection in
                         Text(selection.rawValue.capitalized)
-                            .fontWeight(.black)
+                            .foregroundStyle(Color.label)
                     }
                 }
-                .tint(Color.black.opacity(0.7))
+                .tint(Color.label)
                 .accessibilityIdentifier(
                     AccessibilityIdentifiers.addLogPicker
                 )

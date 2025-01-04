@@ -36,7 +36,7 @@ final class DataOfDaySource {
         if let url {
             do {
                 let (data, _) = try await URLSession.shared.data(from: url)
-                let content = decodeContent(from: data)
+                let content = Content.decodeContent(from: data)
                 return content
             } catch {
                 throw .fetchError
@@ -46,9 +46,4 @@ final class DataOfDaySource {
         }
     }
 
-}
-
-enum DataOfDayError: Error {
-    case fetchError
-    case noURL
 }

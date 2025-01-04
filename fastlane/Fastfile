@@ -6,11 +6,110 @@ default_platform(:ios)
 platform :ios do
   desc "Description of what the lane does"
   lane :build_and_test do
-    run_tests(scheme: "ModernLogging-DEV")
+    scan(scheme: ENV['XCODE_SCHEME'])
+  end
+
+  desc "Creates a temporary folder to store ipa files."
+  lane :create_temp do
+    sh("mkdir TEMP")
+  end
+
+  desc "Keychain and signing actions"
+  lane :setup_keychain do
+    create_keychain(
+      name: "CIKeychain",
+      default_keychain: true,
+      password: ENV['KEYCHAIN_PASS'],
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: true
+    )
+
+    app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_API_KEY_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_API_KEY_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_API_KEY_KEY"],
+      in_house: false
+    )
+
+    match(type: "development", readonly: true)
+
+    match(type: "adhoc", readonly: true)
+  end
+
+  desc "Removes the leftover files"
+  lane :remove_leftovers do
+    sh("rm -rf TEMP")
   end
 
   desc "Check Code Quality"
   lane :lint do
     swiftlint
+  end
+
+  desc "Build the app, and send the dev build into github actions"
+  lane :build_and_deploy do
+
+    gym(
+      output_directory: "TEMP",
+      output_name: ENV['XCODE_SCHEME'],
+      scheme: ENV['XCODE_SCHEME'],
+      export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
+      export_options: {
+        provisioningProfiles: {
+          "tr.com.egesucu.ModernLogging" => "match AdHoc tr.com.egesucu.ModernLogging",
+          "tr.com.egesucu.ModernLogging.dev" => "match AdHoc tr.com.egesucu.ModernLogging.dev"
+        }
+      },
+      silent: true,
+      suppress_xcode_output: false,
+      include_bitcode: false
+    )
+
+    version = get_version_number(xcodeproj: "ModernLogging.xcodeproj")
+    build_number = get_build_number(xcodeproj: "ModernLogging.xcodeproj")
+
+    set_github_release(
+      repository_name: "egesucu/ModernLogging",
+      api_token: ENV["GITHUB_TOKEN"],
+      name: "#{version}(#{build_number})-DEV",
+      tag_name: "#{version}(#{build_number})-DEV",
+      description: "No changelog provided",
+      commitish: "main",
+      upload_assets: ["TEMP/ModernLogging-DEV.ipa"]
+    )
+
+  end
+
+  desc "Build and send the prod build into Github Actions"
+  lane :build_and_distribute do
+    gym(
+      output_directory: "TEMP",
+      output_name: ENV['XCODE_SCHEME'],
+      scheme: ENV['XCODE_SCHEME'],
+      export_method: ENV['BUILD_AND_SIGN_EXPORT_METHOD'],
+      export_options: {
+        provisioningProfiles: {
+          "tr.com.egesucu.ModernLogging" => "match AdHoc tr.com.egesucu.ModernLogging",
+          "tr.com.egesucu.ModernLogging.dev" => "match AdHoc tr.com.egesucu.ModernLogging.dev"
+        }
+      },
+      silent: true,
+      suppress_xcode_output: false,
+      include_bitcode: false
+    )
+
+    version = get_version_number(xcodeproj: "ModernLogging.xcodeproj")
+    build_number = get_build_number(xcodeproj: "ModernLogging.xcodeproj")
+
+    set_github_release(
+      repository_name: "egesucu/ModernLogging",
+      api_token: ENV["GITHUB_TOKEN"],
+      name: "#{version}(#{build_number})",
+      tag_name: "#{version}(#{build_number})",
+      description: "No changelog provided",
+      commitish: "main",
+      upload_assets: ["TEMP/ModernLogging.ipa"]
+    )
   end
 end
