@@ -1,8 +1,6 @@
 name: iOS CI/CD
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "develop", "main" ]
 
@@ -39,8 +37,7 @@ jobs:
           bundle exec fastlane lint
       - name: Build & Test
         run: |
-#          bundle exec fastlane build_and_test --env development
-#          Commented now to continue w/o tests
+          bundle exec fastlane build_and_test --env development
       - name: Deploy DEV
         run: |
           bundle exec fastlane build_and_deploy --env development
