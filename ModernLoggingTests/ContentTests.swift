@@ -60,6 +60,28 @@ struct ContentTests {
             #expect(Bool(false), "Failed to decode JSON")
         }
     }
+    
+    @Test func testFailDecodeUselessAdvice() {
+        let jsonData = """
+        {
+            "text": "Always lick the spoon."
+        }
+        """
+        let data = Data(jsonData.utf8)
+
+        if let content = Content.decodeContent(from: data) {
+            switch content {
+            case .uselessAdvice(let advice):
+                #expect(advice == "Always lick the spoon.")
+                #expect(content.title == "Useless Advice")
+                #expect(content.content == "Always lick the fork.")
+            default:
+                #expect(Bool(false), "Expected .uselessAdvice but got \(content)")
+            }
+        } else {
+            #expect(Bool(false), "Failed to decode JSON")
+        }
+    }
 
     @Test func testDecodeInvalidJSON() {
         let jsonData = """
